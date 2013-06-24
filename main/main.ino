@@ -1,5 +1,5 @@
 #include <SoftwareSerial.h>
-
+#include <Move.h>
 #include <TinyGPS.h>
 // TO DO X Y Z ACCELARATIONS !!!!!!!!!!!!!!!!!!!!!!!!!
 TinyGPS gps;
@@ -9,14 +9,27 @@ static void gpsdump();//Epistrefei oles tis metablites se sxesi me to gps pou xr
 static bool feedgps();
 float ftarget_angle;
 float ftarget_course;
-void setup()
-{
-  Serial.begin(115200);
-  nss.begin(9600);
+int pinI1A=6;//define I1 port DC motor A
+int pinI2A=7;//define I2 port DC motor A
+int pinI1B=8;//define I1 port DC motor B
+int pinI2B=9;//define I2 port DC motor B
+int speedpinA=10;//define EA(PWM speed regulation)port
+int speedpinB=11;//define EB(PWM speed regulation)port
+
+void setup(){
+    pinMode(pinI1A,OUTPUT);//define this port as output
+    pinMode(pinI2A,OUTPUT);
+    pinMode(speedpinA,OUTPUT);
+
+    pinMode(pinI1B,OUTPUT);//define this port as output
+    pinMode(pinI2B,OUTPUT);
+    pinMode(speedpinB,OUTPUT);
+
+    Serial.begin(115200);
+    nss.begin(9600);
 }
 
-void loop()
-{
+void loop(){
   bool newdata = false;
   unsigned long start = millis();
   
@@ -30,8 +43,7 @@ void loop()
   }
 }
 
-static void gpsdump()
-{
+static void gpsdump(){
   float flat, flon,faltitude,fcourse,fspeed,fdistance;
   unsigned long age, date, time, chars = 0;
   unsigned short sentences = 0, failed = 0;
