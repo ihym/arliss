@@ -56,11 +56,11 @@ void loop(){
 			else{
 				if(controller(fcourse,ftarget_course)>20 && controller(fcourse,ftarget_course)<=180){
 					turn_right(speedpinA,speedpinB,pinI1A,pinI2A,pinI1B,pinI2B);
-					Serial.print("Turn Left");
+					Serial.print("Turn Right");
 				}
 				else if(controller(fcourse,ftarget_course)>180 && controller(fcourse,ftarget_course)<340){
 					turn_left(speedpinA,speedpinB,pinI1A,pinI2A,pinI1B,pinI2B);
-					Serial.print("Turn Right");
+					Serial.print("Turn Left");
 				}
 				else{
 					move_fowards(speedpinA,speedpinB,pinI1A,pinI2A,pinI1B,pinI2B);
